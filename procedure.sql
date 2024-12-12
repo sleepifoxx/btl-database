@@ -1,10 +1,11 @@
 -- STORED PROCEDURE --
 
+USE project;
 DELIMITER |
 
 CREATE PROCEDURE showAuthors ()
 BEGIN
-	SELECT * FROM project.AUTHORS;
+	SELECT * FROM AUTHORS;
 END|
 
 CREATE PROCEDURE calculateTotal (
@@ -12,7 +13,10 @@ CREATE PROCEDURE calculateTotal (
     OUT total INT
 )
 BEGIN
-	SET total = (SELECT SUM(quantity_ordered * price_each) FROM orderdetails WHERE order_id = input_order_id);
+	SET total = 
+    (SELECT SUM(quantity_ordered * price_each) 
+    FROM ORDERDETAILS 
+    WHERE order_id = input_order_id);
 END|
 
 DELIMITER ;
